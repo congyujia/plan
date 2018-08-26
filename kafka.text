@@ -1,0 +1,23 @@
+配置改动: server.properties
+    打开：listeners=PLAINTEXT://192.168.124.128:9092
+    打开：advertised.listeners=PLAINTEXT://192.168.124.128:9092
+启动
+    sudo ./kafka-server-start.sh -daemon ../config/server.properties
+TOPIC相关：
+    查看topic:
+        ./kafka-topics.sh --list --zookeeper 127.0.0.1:2181
+        ./kafka-topics.sh --describe --zookeeper 127.0.0.1:2181  --topic test0
+    创建新的topic:
+        ./kafka-topics.sh --create --topic test0 --zookeeper 127.0.0.1:2181
+            --config max.message.bytes=12800000 --config flush.messages=1 --partitions 5 --replication-factor 1
+            说明：
+                --topic后面的test0是topic的名称
+                --zookeeper应该和server.properties文件中的zookeeper.connect一样
+                --config指定当前topic上有效的参数值
+                --partitions指定topic的partition数量，如果不指定该数量，默认是server.properties文件中的num.partitions配置值
+                --replication-factor指定每个partition的副本个数，默认1个
+
+
+
+
+
