@@ -8,15 +8,17 @@ TOPIC相关：
         ./kafka-topics.sh --list --zookeeper 127.0.0.1:2181
         ./kafka-topics.sh --describe --zookeeper 127.0.0.1:2181  --topic test0
     创建新的topic:
-        ./kafka-topics.sh --create --topic test0 --zookeeper 127.0.0.1:2181
-            --config max.message.bytes=12800000 --config flush.messages=1 --partitions 5 --replication-factor 1
+        ./kafka-topics.sh --create --topic test0 --zookeeper 127.0.0.1:2181 --config max.message.bytes=12800000 --config flush.messages=1 --partitions 5 --replication-factor 1
             说明：
                 --topic后面的test0是topic的名称
                 --zookeeper应该和server.properties文件中的zookeeper.connect一样
                 --config指定当前topic上有效的参数值
                 --partitions指定topic的partition数量，如果不指定该数量，默认是server.properties文件中的num.partitions配置值
                 --replication-factor指定每个partition的副本个数，默认1个
-
+    向topic中发送消息：
+        ./kafka-console-producer.sh --broker-list PLAINTEXT://192.168.124.128:9092 --topic test0
+    消费kafka消息
+        ./kafka-console-consumer.sh --bootstrap-server PLAINTEXT://192.168.124.128:9092 --topic test0 --from-beginning
 
 
 
